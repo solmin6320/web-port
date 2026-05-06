@@ -76,7 +76,8 @@ function closeModal() {
     overlay.classList.remove('show');
 }
 
-// --- 5. 애니메이션 종료 후 스크롤 활성화 ---
+// --- 5. 애니메이션 종료 후 스크롤 활성화 (시간 단축) ---
+// CSS에서 애니메이션이 0.8초+0.1초 딜레이로 끝나므로 1초(1000ms) 뒤에 풀어줍니다.
 setTimeout(() => {
     document.body.style.overflow = 'auto';
-}, 2500);
+}, 1000);
