@@ -1,0 +1,189 @@
+/* --- 1. 통일성/유지보수를 위한 전역 변수 설정 --- */
+:root {
+    --bg-outside: #2a2b2e;
+    --bg-container: #ffffff;
+    --text-main: #334155;
+    
+    --table-header-bg: #1e293b;
+    --table-header-text: #ffffff;
+    --table-border: #e2e8f0;
+
+    --p1-bg: #e0f2fe; --p1-txt: #0369a1;
+    --p2-bg: #dcfce7; --p2-txt: #15803d;
+    --p3-bg: #fef9c3; --p3-txt: #a16207;
+    --p4-bg: #f3e8ff; --p4-txt: #7e22ce;
+    --p5-bg: #fee2e2; --p5-txt: #b91c1c;
+    --p6-bg: #ffedd5; --p6-txt: #c2410c;
+    --p7-bg: #ccfbf1; --p7-txt: #0f766e;
+}
+
+/* 기본 리셋 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-outside);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; 
+}
+
+/* --- 2. 인트로 애니메이션 --- */
+.intro-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 200vh;
+    background: linear-gradient(to top, #000000 0%, var(--bg-outside) 50%, #ffffff 100%);
+    z-index: 9999;
+    animation: slideUp 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); visibility: hidden; }
+}
+
+/* --- 3. 시간표 컨테이너 & 헤더 --- */
+.timetable-container {
+    background: var(--bg-container);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 90%;
+    z-index: 10;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: var(--text-main);
+    margin: 0 0 10px 0;
+}
+
+/* 현재 시간 표시 스타일 */
+.current-time {
+    display: inline-block;
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+th {
+    background-color: var(--table-header-bg);
+    color: var(--table-header-text);
+    font-weight: 700;
+}
+
+/* 교시 표시 열 스타일 */
+.time-col {
+    font-weight: bold;
+    color: #334155;
+    background-color: #f8fafc;
+    line-height: 1.4;
+}
+
+/* 작은 글씨 시간 범위 스타일 */
+.time-range {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* 교시별 색상 적용 */
+.p1 { background-color: var(--p1-bg); color: var(--p1-txt); }
+.p2 { background-color: var(--p2-bg); color: var(--p2-txt); }
+.p3 { background-color: var(--p3-bg); color: var(--p3-txt); }
+.p4 { background-color: var(--p4-bg); color: var(--p4-txt); }
+.p5 { background-color: var(--p5-bg); color: var(--p5-txt); }
+.p6 { background-color: var(--p6-bg); color: var(--p6-txt); }
+.p7 { background-color: var(--p7-bg); color: var(--p7-txt); }
+.empty { background-color: var(--table-border); color: #94a3b8; }
+
+/* 일반 과목 셀 마우스 오버 효과 */
+td[class^="p"]:hover {
+    filter: brightness(0.95);
+    transform: scale(1.02);
+    transition: all 0.2s;
+    cursor: default;
+}
+
+/* 점심시간 행 */
+.lunch-row {
+    background-color: #fffbeb;
+    color: #d97706;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.lunch-row:hover { background-color: #fef3c7; }
+
+/* --- 4. 급식 모달(팝업) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    min-width: 300px;
+}
+
+.modal.show {
+    opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1);
+}
+.modal-overlay.show { display: block; }
+
+.modal h2 { margin-top: 0; color: #ff6b6b; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;}
+.menu-list { list-style: none; padding: 0; margin: 20px 0; text-align: center; }
+.menu-list li { padding: 12px 0; font-size: 16px; font-weight: 500; }
+.menu-list li:not(:last-child) { border-bottom: 1px dashed var(--table-border); }
+
+.close-btn {
+    background: var(--table-header-bg); color: white;
+    border: none; padding: 10px 20px;
+    border-radius: 8px; cursor: pointer;
+    font-size: 15px; transition: 0.2s;
+}
+.close-btn:hover { background: #0f172a; }
