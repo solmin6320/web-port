@@ -30,16 +30,15 @@ body {
     overflow: hidden; 
 }
 
-/* --- 2. 인트로 애니메이션 (속도 단축) --- */
+/* --- 2. 인트로 애니메이션 (보기 좋은 1.2초로 수정) --- */
 .intro-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 200vh;
     background: linear-gradient(to top, #000000 0%, var(--bg-outside) 50%, #ffffff 100%);
     z-index: 9999;
-    /* 2초에서 0.8초로 단축, 약간 더 빠른 타이밍(0.1s)에 시작 */
-    animation: slideUp 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    animation-delay: 0.1s;
+    animation: slideUp 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 0.2s;
 }
 
 @keyframes slideUp {
