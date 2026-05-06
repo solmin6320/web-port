@@ -1,6 +1,6 @@
 /* --- 1. 통일성/유지보수를 위한 전역 변수 설정 --- */
 :root {
-    --bg-outside: #2a2b2e;
+    --bg-outside: #2a2b2e; /* 밝은 검은색 */
     --bg-container: #ffffff;
     --text-main: #334155;
     
@@ -30,15 +30,16 @@ body {
     overflow: hidden; 
 }
 
-/* --- 2. 인트로 애니메이션 --- */
+/* --- 2. 인트로 애니메이션 (속도 단축) --- */
 .intro-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 200vh;
     background: linear-gradient(to top, #000000 0%, var(--bg-outside) 50%, #ffffff 100%);
     z-index: 9999;
-    animation: slideUp 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    animation-delay: 0.3s;
+    /* 2초에서 0.8초로 단축, 약간 더 빠른 타이밍(0.1s)에 시작 */
+    animation: slideUp 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 0.1s;
 }
 
 @keyframes slideUp {
