@@ -97,13 +97,20 @@
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
     <div class="modal" id="lunchModal">
-        <h2 id="lunchDateTitle">오늘의 급식</h2>
-        <ul class="menu-list" id="lunchMenuList">
-            </ul>
-        <button class="close-btn" onclick="closeModal()">닫기</button>
+        
+        <div class="meal-section">
+            <h2 id="todayDateTitle" class="meal-title">오늘의 급식</h2>
+            <ul class="menu-list" id="todayMenuList"></ul>
+        </div>
+
+        <div class="meal-section" style="margin-top: 30px;">
+            <h2 id="tomorrowDateTitle" class="meal-title tomorrow-title">내일의 급식</h2>
+            <ul class="menu-list" id="tomorrowMenuList"></ul>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" style="margin-top: 15px;">닫기</button>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
