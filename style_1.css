@@ -1,6 +1,5 @@
-/* --- 1. 통일성/유지보수를 위한 전역 변수 설정 --- */
 :root {
-    --bg-outside: #2a2b2e; /* 밝은 검은색 */
+    --bg-outside: #2a2b2e;
     --bg-container: #ffffff;
     --text-main: #334155;
     
@@ -17,7 +16,6 @@
     --p7-bg: #ccfbf1; --p7-txt: #0f766e;
 }
 
-/* 기본 리셋 */
 body {
     margin: 0;
     padding: 0;
@@ -30,7 +28,6 @@ body {
     overflow: hidden; 
 }
 
-/* --- 2. 인트로 애니메이션 (보기 좋은 1.2초로 수정) --- */
 .intro-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -46,7 +43,6 @@ body {
     100% { transform: translateY(-100%); visibility: hidden; }
 }
 
-/* --- 3. 시간표 컨테이너 & 헤더 --- */
 .timetable-container {
     background: var(--bg-container);
     padding: 40px;
@@ -67,7 +63,6 @@ h1 {
     margin: 0 0 10px 0;
 }
 
-/* 현재 시간 표시 스타일 */
 .current-time {
     display: inline-block;
     background-color: #f1f5f9;
@@ -79,7 +74,6 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* 테이블 스타일 */
 table {
     width: 100%;
     border-collapse: separate;
@@ -100,7 +94,6 @@ th {
     font-weight: 700;
 }
 
-/* 교시 표시 열 스타일 */
 .time-col {
     font-weight: bold;
     color: #334155;
@@ -108,14 +101,12 @@ th {
     line-height: 1.4;
 }
 
-/* 작은 글씨 시간 범위 스타일 */
 .time-range {
     font-size: 12px;
     color: #94a3b8;
     font-weight: 400;
 }
 
-/* 교시별 색상 적용 */
 .p1 { background-color: var(--p1-bg); color: var(--p1-txt); }
 .p2 { background-color: var(--p2-bg); color: var(--p2-txt); }
 .p3 { background-color: var(--p3-bg); color: var(--p3-txt); }
@@ -125,7 +116,6 @@ th {
 .p7 { background-color: var(--p7-bg); color: var(--p7-txt); }
 .empty { background-color: var(--table-border); color: #94a3b8; }
 
-/* 일반 과목 셀 마우스 오버 효과 */
 td[class^="p"]:hover {
     filter: brightness(0.95);
     transform: scale(1.02);
@@ -133,7 +123,6 @@ td[class^="p"]:hover {
     cursor: default;
 }
 
-/* 점심시간 행 */
 .lunch-row {
     background-color: #fffbeb;
     color: #d97706;
@@ -143,7 +132,7 @@ td[class^="p"]:hover {
 }
 .lunch-row:hover { background-color: #fef3c7; }
 
-/* --- 4. 급식 모달(팝업) --- */
+/* 모달창 스타일 업그레이드 */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -167,7 +156,9 @@ td[class^="p"]:hover {
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-align: center;
-    min-width: 300px;
+    min-width: 350px;
+    max-height: 90vh; /* 모달창이 화면보다 커지면 스크롤 생성 */
+    overflow-y: auto;
 }
 
 .modal.show {
@@ -175,14 +166,25 @@ td[class^="p"]:hover {
 }
 .modal-overlay.show { display: block; }
 
-.modal h2 { margin-top: 0; color: #ff6b6b; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;}
-.menu-list { list-style: none; padding: 0; margin: 20px 0; text-align: center; }
-.menu-list li { padding: 12px 0; font-size: 16px; font-weight: 500; }
+/* 오늘 / 내일 제목 스타일 분리 */
+.meal-title {
+    margin-top: 0; 
+    color: #ff6b6b; /* 오늘 급식: 빨간색 계열 */
+    border-bottom: 2px solid #f1f5f9; 
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+.tomorrow-title {
+    color: #3b82f6; /* 내일 급식: 파란색 계열로 차이점 둠 */
+}
+
+.menu-list { list-style: none; padding: 0; margin: 15px 0; text-align: center; }
+.menu-list li { padding: 8px 0; font-size: 15px; font-weight: 500; color: var(--text-main); }
 .menu-list li:not(:last-child) { border-bottom: 1px dashed var(--table-border); }
 
 .close-btn {
     background: var(--table-header-bg); color: white;
-    border: none; padding: 10px 20px;
+    border: none; padding: 10px 30px;
     border-radius: 8px; cursor: pointer;
     font-size: 15px; transition: 0.2s;
 }
